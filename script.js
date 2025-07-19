@@ -4,7 +4,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const headerOffset = 80;
+            const headerOffset = window.innerWidth <= 768 ? 70 : 80;
             const elementPosition = target.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -16,9 +16,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Enhanced header scroll effects
+// Enhanced header scroll effects with mobile optimization
 let lastScrollTop = 0;
-window.addEventListener('scroll', function() {
+let ticking = false;
+
+function updateHeaderOnScroll() {
     const header = document.querySelector('.header');
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
@@ -29,22 +31,35 @@ window.addEventListener('scroll', function() {
         header.classList.remove('scrolled');
     }
     
-    // Hide/show header on scroll (optional enhancement)
-    if (scrollTop > lastScrollTop && scrollTop > 100) {
-        header.style.transform = 'translateY(-100%)';
-    } else {
-        header.style.transform = 'translateY(0)';
+    // Hide/show header on scroll (mobile only)
+    if (window.innerWidth <= 768) {
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            header.style.transform = 'translateY(0)';
+        }
     }
+    
     lastScrollTop = scrollTop;
+    ticking = false;
+}
+
+window.addEventListener('scroll', function() {
+    if (!ticking) {
+        requestAnimationFrame(updateHeaderOnScroll);
+        ticking = true;
+    }
 });
 
-// Enhanced mobile navigation
+// Enhanced mobile navigation with touch support
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-menu');
 const body = document.body;
 
 if (navToggle && navMenu) {
-    navToggle.addEventListener('click', function() {
+    // Toggle menu on click
+    navToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
         navMenu.classList.toggle('active');
         navToggle.classList.toggle('active');
         body.classList.toggle('nav-open');
@@ -59,17 +74,33 @@ if (navToggle && navMenu) {
         });
     });
 
-    // Close menu when clicking outside
+    // Close menu when clicking outside (desktop and mobile)
     document.addEventListener('click', (e) => {
-        if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+        if (!navMenu.contains(e.target) && !navToggle.contains(e.target) && navMenu.classList.contains('active')) {
             navMenu.classList.remove('active');
             navToggle.classList.remove('active');
             body.classList.remove('nav-open');
         }
     });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            body.classList.remove('nav-open');
+        }
+    });
+
+    // Prevent scroll when menu is open on mobile
+    navMenu.addEventListener('touchmove', function(e) {
+        if (navMenu.classList.contains('active')) {
+            e.preventDefault();
+        }
+    }, { passive: false });
 }
 
-// Enhanced current status with real-time updates
+// Enhanced current status with real-time updates and mobile optimization
 function updateCurrentStatus() {
     const now = new Date();
     const currentHour = now.getHours();
@@ -113,10 +144,10 @@ document.head.appendChild(style);
 updateCurrentStatus();
 setInterval(updateCurrentStatus, 60000);
 
-// Enhanced intersection observer for animations
+// Enhanced intersection observer with mobile optimization
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: window.innerWidth <= 768 ? 0.05 : 0.1,
+    rootMargin: window.innerWidth <= 768 ? '0px 0px -30px 0px' : '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver(function(entries) {
@@ -129,67 +160,94 @@ const observer = new IntersectionObserver(function(entries) {
     });
 }, observerOptions);
 
-// Progressive enhancement for animations
+// Progressive enhancement for animations with mobile considerations
 document.addEventListener('DOMContentLoaded', function() {
-    // Animate sections
-    const sections = document.querySelectorAll('.about, .menu, .hours, .contact, .features-strip');
+    // Reduce motion for users who prefer it
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
-    sections.forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(30px)';
-        section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-        observer.observe(section);
-    });
+    if (!prefersReducedMotion) {
+        // Animate sections
+        const sections = document.querySelectorAll('.about, .menu, .hours, .contact, .features-strip');
+        
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(section);
+        });
 
-    // Animate menu items with stagger
-    const menuItems = document.querySelectorAll('.menu-item');
-    menuItems.forEach((item, index) => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateY(30px)';
-        item.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-        observer.observe(item);
-    });
+        // Animate menu items with stagger (reduced on mobile)
+        const menuItems = document.querySelectorAll('.menu-item');
+        const staggerDelay = window.innerWidth <= 768 ? 0.05 : 0.1;
+        menuItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = `opacity 0.6s ease ${index * staggerDelay}s, transform 0.6s ease ${index * staggerDelay}s`;
+            observer.observe(item);
+        });
 
-    // Animate feature items
-    const features = document.querySelectorAll('.feature');
-    features.forEach((feature, index) => {
-        feature.style.opacity = '0';
-        feature.style.transform = 'translateY(20px)';
-        feature.style.transition = `opacity 0.6s ease ${index * 0.15}s, transform 0.6s ease ${index * 0.15}s`;
-        observer.observe(feature);
-    });
+        // Animate feature items
+        const features = document.querySelectorAll('.feature');
+        features.forEach((feature, index) => {
+            feature.style.opacity = '0';
+            feature.style.transform = 'translateY(20px)';
+            feature.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+            observer.observe(feature);
+        });
 
-    // Animate contact cards
-    const contactCards = document.querySelectorAll('.contact-card');
-    contactCards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = `opacity 0.6s ease ${index * 0.2}s, transform 0.6s ease ${index * 0.2}s`;
-        observer.observe(card);
-    });
+        // Animate contact cards
+        const contactCards = document.querySelectorAll('.contact-card');
+        contactCards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = `opacity 0.6s ease ${index * 0.15}s, transform 0.6s ease ${index * 0.15}s`;
+            observer.observe(card);
+        });
+    }
 });
 
-// Enhanced hover effects for menu items
+// Enhanced hover effects with touch device support
 document.querySelectorAll('.menu-item').forEach(item => {
-    item.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-8px) scale(1.02)';
-        this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+    // Only add hover effects on non-touch devices
+    if (window.matchMedia('(hover: hover)').matches) {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px) scale(1.02)';
+            this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    }
+    
+    // Add touch feedback for mobile
+    item.addEventListener('touchstart', function() {
+        this.style.transform = 'scale(0.98)';
+        this.style.transition = 'transform 0.1s ease';
     });
     
-    item.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
+    item.addEventListener('touchend', function() {
+        this.style.transform = 'scale(1)';
     });
 });
 
-// Phone number click tracking with user feedback
+// Phone number click tracking with enhanced mobile feedback
 document.addEventListener('DOMContentLoaded', function() {
     const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
     phoneLinks.forEach(phoneLink => {
         phoneLink.addEventListener('click', function() {
-            // Show brief confirmation
+            // Enhanced mobile feedback
             const originalText = this.textContent;
+            this.style.opacity = '0.7';
             this.textContent = 'Calling...';
+            
+            // Haptic feedback on supported devices
+            if ('vibrate' in navigator) {
+                navigator.vibrate(100);
+            }
+            
             setTimeout(() => {
+                this.style.opacity = '1';
                 this.textContent = originalText;
             }, 1500);
             
@@ -198,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Enhanced image loading with progressive enhancement
+// Enhanced image loading with mobile optimization
 document.addEventListener('DOMContentLoaded', function() {
     const images = document.querySelectorAll('img');
     
@@ -220,29 +278,39 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Active navigation highlighting with smooth transitions
+// Active navigation highlighting with mobile optimization
+let scrollTimeout;
 window.addEventListener('scroll', function() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-menu a');
+    // Throttle scroll events on mobile for better performance
+    if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+    }
     
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (window.scrollY >= (sectionTop - 200)) {
-            current = section.getAttribute('id');
-        }
-    });
+    scrollTimeout = setTimeout(() => {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        
+        let current = '';
+        const offset = window.innerWidth <= 768 ? 100 : 150;
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (window.scrollY >= (sectionTop - offset)) {
+                current = section.getAttribute('id');
+            }
+        });
 
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    }, window.innerWidth <= 768 ? 100 : 50);
 });
 
-// Hero stats counter animation
+// Hero stats counter animation with mobile considerations
 function animateCounter(element, target, duration = 2000) {
     let start = 0;
     const increment = target / (duration / 16);
@@ -265,6 +333,13 @@ const heroStatsObserver = new IntersectionObserver((entries) => {
             const statNumbers = entry.target.querySelectorAll('.stat-number');
             statNumbers.forEach(stat => {
                 const text = stat.textContent;
+                
+                // Skip animation for time formats (contains colon)
+                if (text.includes(':')) {
+                    stat.dataset.animated = 'true';
+                    return;
+                }
+                
                 const number = parseInt(text.replace(/\D/g, ''));
                 if (number && !stat.dataset.animated) {
                     stat.dataset.animated = 'true';
@@ -284,7 +359,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Enhanced accessibility features
+// Enhanced accessibility features with mobile support
 document.addEventListener('DOMContentLoaded', function() {
     // Add skip link for keyboard users
     const skipLink = document.createElement('a');
@@ -297,11 +372,12 @@ document.addEventListener('DOMContentLoaded', function() {
         left: 6px;
         background: var(--primary-purple);
         color: white;
-        padding: 8px;
+        padding: 8px 12px;
         text-decoration: none;
         border-radius: 4px;
-        z-index: 1001;
+        z-index: 1002;
         transition: top 0.3s;
+        font-size: 0.875rem;
     `;
     
     skipLink.addEventListener('focus', function() {
@@ -319,18 +395,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (heroSection) {
         heroSection.id = 'main-content';
     }
-
-    // Enhance keyboard navigation
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-            body.classList.remove('nav-open');
-        }
-    });
 });
 
-// Performance optimization: Lazy loading for non-critical images
+// Performance optimization: Enhanced lazy loading for mobile
 if ('IntersectionObserver' in window) {
     const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -343,6 +410,8 @@ if ('IntersectionObserver' in window) {
                 imageObserver.unobserve(img);
             }
         });
+    }, {
+        rootMargin: window.innerWidth <= 768 ? '50px' : '100px'
     });
 
     // Apply lazy loading to images below the fold
@@ -352,7 +421,31 @@ if ('IntersectionObserver' in window) {
     });
 }
 
-// Smooth page transitions and loading states
+// Touch and gesture support for mobile
+document.addEventListener('DOMContentLoaded', function() {
+    // Add touch class for touch devices
+    if ('ontouchstart' in window) {
+        document.body.classList.add('touch-device');
+    }
+    
+    // Handle orientation changes
+    window.addEventListener('orientationchange', function() {
+        // Close mobile menu on orientation change
+        if (navMenu && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            body.classList.remove('nav-open');
+        }
+        
+        // Recalculate observer thresholds
+        setTimeout(() => {
+            observerOptions.threshold = window.innerWidth <= 768 ? 0.05 : 0.1;
+            observerOptions.rootMargin = window.innerWidth <= 768 ? '0px 0px -30px 0px' : '0px 0px -50px 0px';
+        }, 100);
+    });
+});
+
+// Smooth page transitions and loading states with mobile optimization
 document.addEventListener('DOMContentLoaded', function() {
     // Add loading class initially
     document.body.classList.add('loading');
@@ -362,11 +455,11 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             document.body.classList.remove('loading');
             document.body.classList.add('loaded');
-        }, 100);
+        }, window.innerWidth <= 768 ? 50 : 100);
     });
 });
 
-// Error handling for external links
+// Enhanced error handling for external links with mobile feedback
 document.addEventListener('DOMContentLoaded', function() {
     const externalLinks = document.querySelectorAll('a[target="_blank"]');
     externalLinks.forEach(link => {
@@ -374,6 +467,12 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 // Add visual feedback for external links
                 this.style.opacity = '0.7';
+                
+                // Mobile haptic feedback
+                if ('vibrate' in navigator) {
+                    navigator.vibrate(50);
+                }
+                
                 setTimeout(() => {
                     this.style.opacity = '1';
                 }, 200);
@@ -382,4 +481,43 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+});
+
+// Mobile-specific optimizations
+if (window.innerWidth <= 768) {
+    // Disable hover effects on mobile
+    const style = document.createElement('style');
+    style.textContent = `
+        @media (hover: none) {
+            .menu-item:hover,
+            .about-image-card:hover,
+            .contact-card:hover {
+                transform: none;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Add touch feedback to buttons
+    document.querySelectorAll('.cta-button, .contact-button').forEach(button => {
+        button.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.95)';
+        });
+        
+        button.addEventListener('touchend', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+}
+
+// Viewport height fix for mobile browsers
+function setVHProperty() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+setVHProperty();
+window.addEventListener('resize', setVHProperty);
+window.addEventListener('orientationchange', () => {
+    setTimeout(setVHProperty, 100);
 });
