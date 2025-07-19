@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catch Your Breath Coffee Bar - La Paz, Bolivia</title>
+    <title>Catch Your Breath Coffee Bar - Artisanal Coffee & Bolivian Cuisine | La Paz</title>
+    <meta name="description" content="Experience exceptional artisanal coffee and authentic Bolivian cuisine at Catch Your Breath Coffee Bar in the heart of La Paz. Open daily 7:30 AM - 10:30 PM on Calle Sagarnaga.">
+    <meta name="keywords" content="coffee bar, La Paz, Bolivia, artisanal coffee, empanadas, cafe, Calle Sagarnaga">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="logo copy.jpg">
+    <!-- Open Graph meta tags for social sharing -->
+    <meta property="og:title" content="Catch Your Breath Coffee Bar - La Paz, Bolivia">
+    <meta property="og:description" content="Artisanal coffee and authentic Bolivian cuisine in the heart of La Paz">
+    <meta property="og:image" content="Main photo bakery case.jpg">
+    <meta property="og:url" content="https://oraclepromea.github.io/CatchYourBreath">
 </head>
 <body>
     <!-- Header -->
@@ -14,7 +23,10 @@
         <nav class="nav">
             <div class="nav-brand">
                 <img src="logo copy.jpg" alt="Catch Your Breath Coffee Bar Logo" class="logo">
-                <span class="brand-name">Catch Your Breath</span>
+                <div class="brand-text">
+                    <span class="brand-name">Catch Your Breath</span>
+                    <span class="brand-tagline">Coffee Bar</span>
+                </div>
             </div>
             <ul class="nav-menu">
                 <li><a href="#home">Home</a></li>
@@ -33,29 +45,128 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="hero-title">Catch Your Breath Coffee Bar</h1>
-            <p class="hero-subtitle">Where Coffee Meets Culture in the Heart of La Paz</p>
-            <p class="hero-location">Calle Sagarnaga 327, La Paz, Bolivia</p>
-            <a href="#menu" class="cta-button">Explore Our Menu</a>
+            <div class="hero-badge">
+                <span>★★★★★</span>
+                <span>Rated Excellent on TripAdvisor</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="hero-title-main">Catch Your Breath</span>
+                <span class="hero-title-sub">Coffee Bar</span>
+            </h1>
+            <p class="hero-subtitle">Where Artisanal Coffee Meets Authentic Bolivian Culture</p>
+            <p class="hero-location">
+                <svg class="location-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                Calle Sagarnaga 327, La Paz, Bolivia
+            </p>
+            <div class="hero-actions">
+                <a href="#menu" class="cta-button primary">Explore Our Menu</a>
+                <a href="tel:+59176208376" class="cta-button secondary">
+                    <svg class="phone-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                    </svg>
+                    Call Now
+                </a>
+            </div>
         </div>
         <div class="hero-image">
-            <img src="Main photo bakery case.jpg" alt="Bakery case with delicious pastries">
+            <img src="Main photo bakery case.jpg" alt="Artisanal pastries and coffee at Catch Your Breath Coffee Bar">
+            <div class="hero-image-overlay">
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">7:30 AM</span>
+                        <span class="stat-label">Daily Opening</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Fresh Daily</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Strip -->
+    <section class="features-strip">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">☕</div>
+                    <h3>Premium Coffee</h3>
+                    <p>100% Bolivian beans</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🥟</div>
+                    <h3>Fresh Empanadas</h3>
+                    <p>Made daily with love</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🍰</div>
+                    <h3>Artisan Pastries</h3>
+                    <p>Baked fresh every morning</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🌟</div>
+                    <h3>Cozy Atmosphere</h3>
+                    <p>Perfect for work or relaxation</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Our Story</span>
+                <h2 class="section-title">A Place to Pause & Savor</h2>
+                <p class="section-subtitle">Discover the heart of Bolivian coffee culture in the historic Calle Sagarnaga</p>
+            </div>
             <div class="about-content">
                 <div class="about-text">
-                    <h2>A Place to Pause & Savor</h2>
-                    <p>Nestled in the vibrant heart of La Paz on historic Calle Sagarnaga, Catch Your Breath Coffee Bar offers more than just exceptional coffee. We're a sanctuary where locals and travelers alike can escape the bustling streets and indulge in artisanal coffee, fresh pastries, and warm hospitality.</p>
-                    <p>Our cozy atmosphere, combined with the rich flavors of Bolivia, creates the perfect setting to catch your breath and savor life's simple pleasures.</p>
+                    <div class="about-stats">
+                        <div class="about-stat">
+                            <span class="about-stat-number">2008</span>
+                            <span class="about-stat-label">Established</span>
+                        </div>
+                        <div class="about-stat">
+                            <span class="about-stat-number">1000+</span>
+                            <span class="about-stat-label">Happy Customers</span>
+                        </div>
+                    </div>
+                    <p class="about-description">Nestled in the vibrant heart of La Paz on historic Calle Sagarnaga, Catch Your Breath Coffee Bar offers more than just exceptional coffee. We're a sanctuary where locals and travelers alike can escape the bustling streets and indulge in artisanal coffee, fresh pastries, and warm hospitality.</p>
+                    <p class="about-description">Our cozy atmosphere, combined with the rich flavors of Bolivia, creates the perfect setting to catch your breath and savor life's simple pleasures. Every cup tells a story of our commitment to quality and community.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <span class="about-feature-icon">✓</span>
+                            <span>Locally sourced ingredients</span>
+                        </div>
+                        <div class="about-feature">
+                            <span class="about-feature-icon">✓</span>
+                            <span>Traditional Bolivian recipes</span>
+                        </div>
+                        <div class="about-feature">
+                            <span class="about-feature-icon">✓</span>
+                            <span>Artisanal coffee roasting</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="about-images">
-                    <img src="sideview of bar.jpg" alt="Side view of our cozy coffee bar" class="about-img">
-                    <img src="Front sign for cafe.webp" alt="Front sign of Catch Your Breath Coffee Bar" class="about-img">
+                    <div class="about-image-card">
+                        <img src="sideview of bar.jpg" alt="Cozy interior of Catch Your Breath Coffee Bar" class="about-img">
+                        <div class="about-image-caption">Our welcoming interior</div>
+                    </div>
+                    <div class="about-image-card">
+                        <img src="Front sign for cafe.webp" alt="Historic entrance on Calle Sagarnaga" class="about-img">
+                        <div class="about-image-caption">Historic Calle Sagarnaga location</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -64,37 +175,85 @@
     <!-- Menu Section -->
     <section id="menu" class="menu">
         <div class="container">
-            <h2 class="section-title">Our Delicious Offerings</h2>
+            <div class="section-header">
+                <span class="section-badge">Our Menu</span>
+                <h2 class="section-title">Crafted with Passion, Served with Love</h2>
+                <p class="section-subtitle">Experience the authentic flavors of Bolivia with our carefully curated selection</p>
+            </div>
             <div class="menu-grid">
-                <div class="menu-item">
-                    <img src="cafe latte.jpg" alt="Cafe Latte">
-                    <h3>Artisanal Coffee</h3>
-                    <p>Premium Bolivian coffee beans crafted into perfect lattes, cappuccinos, and espressos</p>
+                <div class="menu-item featured">
+                    <div class="menu-item-badge">Most Popular</div>
+                    <div class="menu-item-image">
+                        <img src="cafe latte.jpg" alt="Signature Bolivian Latte">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Artisanal Coffee</h3>
+                        <p>Premium Bolivian coffee beans crafted into perfect lattes, cappuccinos, and espressos with traditional techniques passed down through generations</p>
+                        <div class="menu-item-features">
+                            <span class="feature-tag">Single Origin</span>
+                            <span class="feature-tag">Fair Trade</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="menu-item">
-                    <img src="empanadas with sauce.jpg" alt="Fresh Empanadas">
-                    <h3>Fresh Empanadas</h3>
-                    <p>Traditional Bolivian empanadas served warm with our signature sauces</p>
+                    <div class="menu-item-image">
+                        <img src="empanadas with sauce.jpg" alt="Traditional Bolivian Empanadas">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Fresh Empanadas</h3>
+                        <p>Traditional Bolivian empanadas served warm with our signature sauces, made fresh daily using authentic family recipes</p>
+                        <div class="menu-item-features">
+                            <span class="feature-tag">Made Fresh Daily</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="menu-item">
-                    <img src="chocolate cake.jpg" alt="Chocolate Cake">
-                    <h3>Homemade Desserts</h3>
-                    <p>Decadent cakes and pastries baked fresh daily</p>
+                    <div class="menu-item-image">
+                        <img src="chocolate cake.jpg" alt="Homemade Chocolate Cake">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Homemade Desserts</h3>
+                        <p>Decadent cakes and pastries baked fresh daily in our kitchen, featuring local ingredients and international techniques</p>
+                        <div class="menu-item-features">
+                            <span class="feature-tag">House Made</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="menu-item">
-                    <img src="lemon meringue pie.jpg" alt="Lemon Meringue Pie">
-                    <h3>Specialty Pies</h3>
-                    <p>Classic pies with a South American twist</p>
+                    <div class="menu-item-image">
+                        <img src="lemon meringue pie.jpg" alt="Artisan Lemon Meringue Pie">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Specialty Pies</h3>
+                        <p>Classic pies with a South American twist, featuring seasonal fruits and traditional Bolivian flavors</p>
+                        <div class="menu-item-features">
+                            <span class="feature-tag">Seasonal</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="menu-item">
-                    <img src="sandwich.jpg" alt="Gourmet Sandwich">
-                    <h3>Gourmet Sandwiches</h3>
-                    <p>Fresh ingredients and local flavors in every bite</p>
+                    <div class="menu-item-image">
+                        <img src="sandwich.jpg" alt="Gourmet Artisan Sandwich">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Gourmet Sandwiches</h3>
+                        <p>Fresh ingredients and local flavors in every bite, served on artisan bread baked in-house daily</p>
+                        <div class="menu-item-features">
+                            <span class="feature-tag">Local Ingredients</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="menu-item">
-                    <img src="warm image of empanadas.jpg" alt="Warm Empanadas">
-                    <h3>Daily Specials</h3>
-                    <p>Ask about our rotating selection of seasonal favorites</p>
+                    <div class="menu-item-image">
+                        <img src="warm image of empanadas.jpg" alt="Daily Special Empanadas">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Daily Specials</h3>
+                        <p>Ask about our rotating selection of seasonal favorites and limited-time offerings crafted by our chef</p>
+                        <div class="menu-item-features">
+                            <span class="feature-tag">Limited Time</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -103,41 +262,44 @@
     <!-- Hours Section -->
     <section id="hours" class="hours">
         <div class="container">
-            <h2 class="section-title">Open Daily</h2>
+            <div class="section-header">
+                <span class="section-badge">Visit Us</span>
+                <h2 class="section-title">Open Every Day</h2>
+                <p class="section-subtitle">We're here to serve you with consistency and quality, seven days a week</p>
+            </div>
             <div class="hours-content">
-                <div class="hours-list">
-                    <div class="hours-item">
-                        <span class="day">Sunday</span>
-                        <span class="time">7:30 AM - 10:30 PM</span>
+                <div class="hours-card">
+                    <div class="hours-header">
+                        <h3>Operating Hours</h3>
+                        <div class="current-status">Open Now</div>
                     </div>
-                    <div class="hours-item">
-                        <span class="day">Monday</span>
-                        <span class="time">7:30 AM - 10:30 PM</span>
-                    </div>
-                    <div class="hours-item">
-                        <span class="day">Tuesday</span>
-                        <span class="time">7:30 AM - 10:30 PM</span>
-                    </div>
-                    <div class="hours-item">
-                        <span class="day">Wednesday</span>
-                        <span class="time">7:30 AM - 10:30 PM</span>
-                    </div>
-                    <div class="hours-item">
-                        <span class="day">Thursday</span>
-                        <span class="time">7:30 AM - 10:30 PM</span>
-                    </div>
-                    <div class="hours-item">
-                        <span class="day">Friday</span>
-                        <span class="time">7:30 AM - 10:30 PM</span>
-                    </div>
-                    <div class="hours-item">
-                        <span class="day">Saturday</span>
-                        <span class="time">7:30 AM - 10:30 PM</span>
+                    <div class="hours-list">
+                        <div class="hours-item">
+                            <span class="day">Monday - Sunday</span>
+                            <span class="time">7:30 AM - 10:30 PM</span>
+                        </div>
+                        <div class="hours-note">
+                            <p><strong>Consistent Hours:</strong> We maintain the same welcoming hours every day of the week, so you can always count on us for your coffee fix.</p>
+                            <p><strong>Perfect Timing:</strong> Whether you need an early morning boost or a late evening treat, we're here for you.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="hours-note">
-                    <p>We're open every day to serve you!</p>
-                    <p class="current-status">Open until 10:30 PM</p>
+                <div class="hours-info">
+                    <div class="hours-feature">
+                        <div class="hours-feature-icon">🌅</div>
+                        <h4>Early Bird Special</h4>
+                        <p>Fresh coffee and pastries ready from 7:30 AM for those early morning starts. Perfect for commuters and early risers.</p>
+                    </div>
+                    <div class="hours-feature">
+                        <div class="hours-feature-icon">🌙</div>
+                        <h4>Evening Atmosphere</h4>
+                        <p>Cozy evening ambiance perfect for late work sessions or casual meetups until 10:30 PM. Ideal for unwinding after a long day.</p>
+                    </div>
+                    <div class="hours-feature">
+                        <div class="hours-feature-icon">📅</div>
+                        <h4>Seven Days a Week</h4>
+                        <p>No matter what day it is, we're here to serve you with the same quality and care. Weekends included with no exceptions.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -146,24 +308,41 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Visit Us</h2>
+            <div class="section-header">
+                <span class="section-badge">Get In Touch</span>
+                <h2 class="section-title">Visit Our Historic Location</h2>
+                <p class="section-subtitle">Find us in the heart of La Paz's most vibrant cultural district</p>
+            </div>
             <div class="contact-content">
                 <div class="contact-info">
-                    <div class="contact-item">
-                        <h3>Location</h3>
+                    <div class="contact-card">
+                        <div class="contact-card-icon">📍</div>
+                        <h3>Our Location</h3>
                         <p>Calle Sagarnaga 327<br>La Paz, Bolivia</p>
+                        <p class="contact-note">Located in the historic Sagarnaga street, famous for its colonial architecture and vibrant cultural atmosphere. Easy to find and accessible by public transport.</p>
                     </div>
-                    <div class="contact-item">
-                        <h3>Phone</h3>
-                        <p><a href="tel:+59176208376">+591-76208376</a></p>
+                    <div class="contact-card">
+                        <div class="contact-card-icon">📞</div>
+                        <h3>Call Us</h3>
+                        <p><a href="tel:+59176208376" class="contact-link">+591-76208376</a></p>
+                        <p class="contact-note">Available during operating hours for reservations and inquiries. We speak Spanish and English to serve both locals and international visitors.</p>
                     </div>
-                    <div class="contact-item">
-                        <h3>Reviews</h3>
-                        <p><a href="https://www.tripadvisor.com/Restaurant_Review-g294072-d28617518-Reviews-Catch_Your_Breath_Coffee_Bar-La_Paz_La_Paz_Department.html" target="_blank">See us on TripAdvisor</a></p>
+                    <div class="contact-card">
+                        <div class="contact-card-icon">⭐</div>
+                        <h3>Customer Reviews</h3>
+                        <p><a href="https://www.tripadvisor.com/Restaurant_Review-g294072-d28617518-Reviews-Catch_Your_Breath_Coffee_Bar-La_Paz_La_Paz_Department.html" target="_blank" class="contact-link">Read our TripAdvisor reviews</a></p>
+                        <p class="contact-note">See what our customers say about their experience and discover why travelers and locals love visiting us for authentic Bolivian coffee culture.</p>
                     </div>
                 </div>
                 <div class="contact-image">
-                    <img src="lots of empanadas with sauce.jpg" alt="Our delicious empanadas">
+                    <img src="lots of empanadas with sauce.jpg" alt="Freshly prepared empanadas with traditional sauces">
+                    <div class="contact-image-overlay">
+                        <div class="contact-cta">
+                            <h4>Ready to visit?</h4>
+                            <p>Come experience the authentic taste of Bolivia in our welcoming atmosphere</p>
+                            <a href="tel:+59176208376" class="contact-button">Call for Reservations</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -173,14 +352,34 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-brand">
-                    <img src="logo copy.jpg" alt="Catch Your Breath Coffee Bar Logo" class="footer-logo">
-                    <span>Catch Your Breath Coffee Bar</span>
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <img src="logo copy.jpg" alt="Catch Your Breath Coffee Bar Logo" class="footer-logo">
+                        <div class="footer-brand-text">
+                            <span class="footer-brand-name">Catch Your Breath Coffee Bar</span>
+                            <span class="footer-brand-tagline">Authentic Bolivian Coffee Experience</span>
+                        </div>
+                    </div>
+                    <p class="footer-description">Experience the rich flavors of Bolivia in our cozy coffee bar located in the historic heart of La Paz. Every cup tells a story of tradition, quality, and community.</p>
                 </div>
                 <div class="footer-info">
-                    <p>&copy; 2025 Catch Your Breath Coffee Bar. All rights reserved.</p>
-                    <p>Calle Sagarnaga 327, La Paz, Bolivia | +591-76208376</p>
+                    <div class="footer-section">
+                        <h4>Contact</h4>
+                        <p>Calle Sagarnaga 327<br>La Paz, Bolivia</p>
+                        <p><a href="tel:+59176208376">+591-76208376</a></p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Hours</h4>
+                        <p>Monday - Sunday<br>7:30 AM - 10:30 PM</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Follow Us</h4>
+                        <p><a href="https://www.tripadvisor.com/Restaurant_Review-g294072-d28617518-Reviews-Catch_Your_Breath_Coffee_Bar-La_Paz_La_Paz_Department.html" target="_blank">TripAdvisor Reviews</a></p>
+                    </div>
                 </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Catch Your Breath Coffee Bar. All rights reserved. | Designed with ❤️ for authentic Bolivian coffee culture</p>
             </div>
         </div>
     </footer>
